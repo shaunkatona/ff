@@ -1,0 +1,27 @@
+{
+  "name": "ff",
+  "version": "0.0.0",
+  "description": "final fantasy draft tool",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.6.1",
+    "stylus": "^0.47.3",
+    "jade": "^1.5.0",
+    "nib": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaunkatona/ff"
+  },
+  "author": "Shaun Katona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaunkatona/ff/issues"
+  },
+  "homepage": "https://github.com/shaunkatona/ff"
+}

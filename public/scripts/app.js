@@ -7,18 +7,23 @@
     app.controller('PlayerController', ['$scope', '$http', function ($scope, $http) {
         $scope.players = {
             available: [],
-            mine: []
+            taken: {
+                mine: []
+            }
         };
 
-        $http.get('json/rankings.json').then(function (res) {
+        $http.get('json/rankings_converted.json').then(function (res) {
             $scope.players.available = res.data;
-
-            console.log($scope.players.available);
         });
 
         $scope.addPlayer = function (player) {
-            $scope.players.available.splice($scope.players.available.indexOf(player));
-            $scope.players.mine.push(player);
-        }
+            $scope.players.available.splice($scope.players.available.indexOf(player), 1);
+            $scope.players.taken.mine.push(player);
+        };
+
+        $scope.releasePlayer = function (player) {
+          $scope.players.taken.mine.splice($scope.players.taken.mine.indexOf(player), 1);
+          $scope.players.available.push(player);
+        };
     }]);
 })();

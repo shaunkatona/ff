@@ -1,0 +1,26 @@
+[
+    {
+        "playerId": "259",
+        "position": "RB",
+        "displayName": "Adrian Peterson",
+        "fname": "Adrian",
+        "lname": "Peterson",
+        "team": "MIN",
+        "byeWeek": "5",
+        "nerdRank": "1.826",
+        "positionRank": "1",
+        "overallRank": "1"
+    },
+    {
+        "playerId": "1981",
+        "position": "RB",
+        "displayName": "Doug Martin",
+        "fname": "Doug",
+        "lname": "Martin",
+        "team": "TB",
+        "byeWeek": "5",
+        "nerdRank": "2.635",
+        "positionRank": "2",
+        "overallRank": "2"
+    }
+]

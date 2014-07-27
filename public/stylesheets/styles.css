@@ -1,3 +1,21 @@
 table {
   float: left;
 }
+tr.K {
+  background-color: #f7f145;
+}
+tr.DEF {
+  background-color: #f9c866;
+}
+tr.QB {
+  background-color: #fc8d8d;
+}
+tr.WR {
+  background-color: #9ef99d;
+}
+tr.RB {
+  background-color: #b0c3fc;
+}
+tr.TE {
+  background-color: #f99fe6;
+}

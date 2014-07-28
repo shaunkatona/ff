@@ -3,72 +3,77 @@
 
 extend layout
 block content
-    .row(ng-controller="PlayerController as PlayerCtrl")
-        .col-md-6
-            table.table.table-bordered
-                thead
-                    tr
-                        th(colspan=100) Available Players
-                    tr
-                        th Overall Rank
-                        th Name
-                        th Position
-                        th Position Rank
-                        th Bye
-                        th(colspan=2) Draft
-                tbody
-                    tr(ng-repeat="player in players.available | orderBy:['position', 'positionRank']", class="{{player.position}}")
-                        td {{player.overallRank}}
-                        td {{player.displayName}}
-                        td {{player.position}}
-                        td {{player.positionRank}}
-                        td {{player.byeWeek}}
-                        td
-                            button(ng-click="addPlayer(player)") Mine
-                        td
-                            select(ng-change="addPlayerToTheirs(player, value)", ng-model="value", ng-options="coach as coach for coach in coaches | orderBy:'toString()'")
-                                option(value="") Theirs
-        .col-md-6
-            table.table.table-bordered
-                thead
-                    tr
-                        th(colspan=100) My Team
-                    tr
-                        th Overall Rank
-                        th Name
-                        th Position
-                        th Position Rank
-                        th Bye
-                        th
-                tbody
-                    tr(ng-repeat="player in players.mine | orderBy:['position', 'positionRank']", class="{{player.position}}")
-                        td {{player.overallRank}}
-                        td {{player.displayName}}
-                        td {{player.position}}
-                        td {{player.positionRank}}
-                        td {{player.byeWeek}}
-                        td
-                            button(ng-click="releasePlayer(player)") Release
-            table.table.table-bordered(ng-repeat="coach in coaches | orderBy:'toString()'")
-                thead
-                    tr
-                        th(colspan=100) {{coach}}'s Team
-                    tr
-                        th Overall Rank
-                        th Name
-                        th Position
-                        th Position Rank
-                        th Bye
-                        th
-                tbody
-                    tr(ng-repeat="player in players.theirs[coach] | orderBy:['position', 'positionRank']", class="{{player.position}}")
-                        td {{player.overallRank}}
-                        td {{player.displayName}}
-                        td {{player.position}}
-                        td {{player.positionRank}}
-                        td {{player.byeWeek}}
-                        td
-                            button(ng-click="releasePlayerFromTheirs(player, coach)") Release
+    div(ng-controller="PlayerController as PlayerCtrl")
+        .row
+            form
+                .col-md-12.text-center.form-group
+                    input(id="searchBox", name="searchBox", placeholder="Search Names", type="text", ng-model="search.displayName")
+        .row
+            .col-md-6
+                table.table.table-bordered
+                    thead
+                        tr
+                            th(colspan=100).text-center Available Players
+                        tr
+                            th Overall Rank
+                            th Name
+                            th Position
+                            th Position Rank
+                            th Bye
+                            th(colspan=2).text-center Draft
+                    tbody
+                        tr(ng-repeat="player in players.available | orderBy:['position', 'positionRank'] | filter: search", class="{{player.position}}")
+                            td {{player.overallRank}}
+                            td {{player.displayName}}
+                            td {{player.position}}
+                            td {{player.positionRank}}
+                            td {{player.byeWeek}}
+                            td
+                                button.btn.btn-default.btn-xs(ng-click="addPlayer(player)", type="button") Mine
+                            td
+                                select(ng-change="addPlayerToTheirs(player, value)", ng-model="value", ng-options="coach as coach for coach in coaches | orderBy:'toString()'")
+                                    option(value="") Theirs
+            .col-md-6
+                table.table.table-bordered
+                    thead
+                        tr
+                            th(colspan=100).text-center My Team
+                        tr
+                            th Overall Rank
+                            th Name
+                            th Position
+                            th Position Rank
+                            th Bye
+                            th
+                    tbody
+                        tr(ng-repeat="player in players.mine | orderBy:['position', 'positionRank'] | filter: search", class="{{player.position}}")
+                            td {{player.overallRank}}
+                            td {{player.displayName}}
+                            td {{player.position}}
+                            td {{player.positionRank}}
+                            td {{player.byeWeek}}
+                            td
+                                button.btn.btn-default.btn-xs(ng-click="releasePlayer(player)", type="button") Release
+                table.table.table-bordered(ng-repeat="coach in coaches | orderBy:'toString()'")
+                    thead
+                        tr
+                            th(colspan=100).text-center {{coach}}'s Team
+                        tr
+                            th Overall Rank
+                            th Name
+                            th Position
+                            th Position Rank
+                            th Bye
+                            th
+                    tbody
+                        tr(ng-repeat="player in players.theirs[coach] | orderBy:['position', 'positionRank'] | filter: search", class="{{player.position}}")
+                            td {{player.overallRank}}
+                            td {{player.displayName}}
+                            td {{player.position}}
+                            td {{player.positionRank}}
+                            td {{player.byeWeek}}
+                            td
+                                button.btn.btn-default.btn-xs(ng-click="releasePlayerFromTheirs(player, coach)", type="button") Release
 
 block scripts
     script(src="scripts/app.js", type="text/javascript")

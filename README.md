@@ -7,8 +7,14 @@ Todo
 ===
 - styling
 - local storage?
-- find $ values?
-- track other teams or just yourself and available?
+- find $ values for bidding?
+- add team rankings (just averages of overall rankings - Steve has best team, Renee 2nd, etc.)
+- add positional rankings (just averages of positional rankings - Steve has 4th best DEF, 9th best QB, etc.)
 - enforce/recommend positions (must have 1 QB, 1 K, 2 RBs, etc)
 - sort by any column
     - back to default sorting (position then positionrank)
+- search by display name functionality
+- only show certain position (buttons?)
+    - maybe collapse entire positions?
+    - collapse other coach's tables?
+- BACK TO TOP link somewhere

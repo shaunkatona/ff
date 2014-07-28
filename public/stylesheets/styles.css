@@ -1,5 +1,9 @@
-table {
-  float: left;
+td,
+th {
+  font-size: 12px;
+}
+th {
+  background-color: #d3d3d3;
 }
 tr.K {
   background-color: #f7f145;

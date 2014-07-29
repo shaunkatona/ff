@@ -7,10 +7,14 @@ block content
         .row
             form
                 .col-md-12.text-center.form-group
-                    input(id="searchBox", name="searchBox", placeholder="Search Names", type="text", ng-model="search.displayName")
+                    input(id="searchBox", name="searchBox", placeholder="Filter Names", type="text", ng-model="search.displayName")
+        .row
+            .col-md-12.text-center
+                button.btn.btn-default(type="button", ng-click="search.position=''") ALL
+                button.btn.btn-default(type="button", ng-click="search.position=position", ng-repeat="position in positions") {{position}}
         .row
             .col-md-6
-                table.table.table-bordered
+                table.table.table-bordered.table-hover
                     thead
                         tr
                             th(colspan=100).text-center Available Players
@@ -22,7 +26,7 @@ block content
                             th Bye
                             th(colspan=2).text-center Draft
                     tbody
-                        tr(ng-repeat="player in players.available | orderBy:['position', 'positionRank'] | filter: search", class="{{player.position}}")
+                        tr(ng-repeat="player in players.available | filter: search | orderBy:['position', 'positionRank'] | limitTo: 25", class="{{player.position}}")
                             td {{player.overallRank}}
                             td {{player.displayName}}
                             td {{player.position}}
@@ -34,7 +38,7 @@ block content
                                 select(ng-change="addPlayerToTheirs(player, value)", ng-model="value", ng-options="coach as coach for coach in coaches | orderBy:'toString()'")
                                     option(value="") Theirs
             .col-md-6
-                table.table.table-bordered
+                table.table.table-bordered.table-hover
                     thead
                         tr
                             th(colspan=100).text-center My Team
@@ -54,7 +58,7 @@ block content
                             td {{player.byeWeek}}
                             td
                                 button.btn.btn-default.btn-xs(ng-click="releasePlayer(player)", type="button") Release
-                table.table.table-bordered(ng-repeat="coach in coaches | orderBy:'toString()'")
+                table.table.table-bordered.table-hover(ng-repeat="coach in coaches | orderBy:'toString()'")
                     thead
                         tr
                             th(colspan=100).text-center {{coach}}'s Team

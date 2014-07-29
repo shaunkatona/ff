@@ -5,6 +5,14 @@
     var app = angular.module('ffApp', []);
 
     app.controller('PlayerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.search = {
+            displayName: "",
+            position: ""
+        };
+
+        $scope.positions = [
+            "DEF", "QB", "RB", "WR", "K", "TE"
+        ];
         $scope.players = {
             available: [],
             mine: [],
@@ -26,7 +34,7 @@
         // TODO: add/edit/remove coaches?
         // TODO: refactor so not 2 lists of coaches
         $scope.coaches = [
-            "Steve Racz", "Jarrod", "Dale", "Ryan", "Brandt", "Steve Okell", "Renee", "Chris", "John", "Andy", "Ben"
+            "Steve R", "Jarrod", "Dale", "Ryan", "Brandt", "Steve O", "Renee", "Chris", "John", "Andy", "Ben"
         ];
 
         $http.get('json/rankings_converted.json').then(function (res) {

@@ -13,8 +13,6 @@ Todo
 - enforce/recommend positions (must have 1 QB, 1 K, 2 RBs, etc)
 - sort by any column
     - back to default sorting (position then positionrank)
-- search by display name functionality
-- only show certain position (buttons?)
-    - maybe collapse entire positions?
-    - collapse other coach's tables?
+- maybe collapse entire positions?
+- collapse other coach's tables?
 - BACK TO TOP link somewhere

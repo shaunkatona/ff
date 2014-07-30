@@ -58,6 +58,13 @@ block content
                             td {{player.byeWeek}}
                             td
                                 button.btn.btn-default.btn-xs(ng-click="releasePlayer(player)", type="button") Release
+                    tfoot
+                        tr
+                            th Average Overall Rank
+                            th(colspan=100)
+                        tr
+                            td {{getMyAverageOverallRank()}}
+                            td(colspan=100)
                 table.table.table-bordered.table-hover(ng-repeat="coach in coaches | orderBy:'toString()'")
                     thead
                         tr
@@ -78,6 +85,12 @@ block content
                             td {{player.byeWeek}}
                             td
                                 button.btn.btn-default.btn-xs(ng-click="releasePlayerFromTheirs(player, coach)", type="button") Release
-
+                    tfoot
+                        tr
+                            th Average Overall Rank
+                            th(colspan=100)
+                        tr
+                            td {{getTheirAverageOverallRank(coach)}}
+                            td(colspan=100)
 block scripts
     script(src="scripts/app.js", type="text/javascript")

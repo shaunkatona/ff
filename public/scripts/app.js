@@ -70,5 +70,35 @@
         $scope.getRowClass = function (player) {
             return player.position;
         };
+
+        $scope.getMyAverageOverallRank = function () {
+            var sum = 0;
+
+            if (!$scope.players.mine.length) {
+                return sum;
+            } else {
+
+                for (var i = 0; i < $scope.players.mine.length; i++) {
+                    sum += $scope.players.mine[i].overallRank;
+                }
+
+                return sum / $scope.players.mine.length;
+            }
+        }
+
+        $scope.getTheirAverageOverallRank = function (coach) {
+            var sum = 0;
+
+            if (!$scope.players.theirs[coach].length) {
+                return sum;
+            } else {
+
+                for (var i = 0; i < $scope.players.theirs[coach].length; i++) {
+                    sum += $scope.players.theirs[coach][i].overallRank;
+                }
+
+                return sum / $scope.players.theirs[coach].length;
+            }
+        }
     }]);
 })();

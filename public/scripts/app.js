@@ -71,6 +71,26 @@
             return player.position;
         };
 
+        $scope.getMyAverageRank = function (position) {
+            var sum = 0;
+            var numPlayersInThatPosition = 0;
+            var _NO_RESULT = "--";
+
+            for (var i = 0; i < $scope.players.mine.length; i++) {
+                if ($scope.players.mine[i].position == position) {
+                    sum += $scope.players.mine[i].positionRank;
+
+                    numPlayersInThatPosition++;
+                }
+            }
+
+            if (!numPlayersInThatPosition) {
+                return _NO_RESULT;
+            }
+
+            return (sum / numPlayersInThatPosition).toFixed(2);
+        };
+
         $scope.getMyAverageOverallRank = function () {
             var sum = 0;
 
@@ -82,23 +102,42 @@
                     sum += $scope.players.mine[i].overallRank;
                 }
 
-                return sum / $scope.players.mine.length;
+                return (sum / $scope.players.mine.length).toFixed(2);
             }
-        }
+        };
 
         $scope.getTheirAverageOverallRank = function (coach) {
             var sum = 0;
 
             if (!$scope.players.theirs[coach].length) {
                 return sum;
-            } else {
-
-                for (var i = 0; i < $scope.players.theirs[coach].length; i++) {
-                    sum += $scope.players.theirs[coach][i].overallRank;
-                }
-
-                return sum / $scope.players.theirs[coach].length;
             }
-        }
+
+            for (var i = 0; i < $scope.players.theirs[coach].length; i++) {
+                sum += $scope.players.theirs[coach][i].overallRank;
+            }
+
+            return (sum / $scope.players.theirs[coach].length).toFixed(2);
+        };
+
+        $scope.getTheirAverageRank = function (coach, position) {
+            var sum = 0;
+            var numPlayersInThatPosition = 0;
+            var _NO_RESULT = "--";
+
+            for (var i = 0; i < $scope.players.theirs[coach].length; i++) {
+                if ($scope.players.theirs[coach][i].position == position) {
+                    sum += $scope.players.theirs[coach][i].positionRank;
+
+                    numPlayersInThatPosition++;
+                }
+            }
+
+            if (!numPlayersInThatPosition) {
+                return _NO_RESULT;
+            }
+
+            return (sum / numPlayersInThatPosition).toFixed(2);
+        };
     }]);
 })();

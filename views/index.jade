@@ -92,5 +92,22 @@ block content
                         tr
                             td {{getTheirAverageOverallRank(coach)}}
                             td(colspan=100)
+        .row
+            .col-md-12
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th
+                            th Overall
+                            th(ng-repeat="position in positions") {{position}}
+                    tbody
+                        tr
+                            th My Team
+                            td {{getMyAverageOverallRank()}}
+                            td(ng-repeat="position in positions") {{getMyAverageRank(position)}}
+                        tr(ng-repeat="coach in coaches")
+                            th {{coach}}
+                            td {{getTheirAverageOverallRank(coach)}}
+                            td(ng-repeat="position in positions") {{getTheirAverageRank(coach, position)}}
 block scripts
     script(src="scripts/app.js", type="text/javascript")

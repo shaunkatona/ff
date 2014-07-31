@@ -5,12 +5,12 @@
     var app = angular.module('ffApp', []);
 
     app.controller('PlayerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.localStorage = window.localStorage;
         $scope.savedRosters = [];
         $scope.search = {
             displayName: "",
             position: ""
         };
-
         $scope.positions = [
             "DEF", "QB", "RB", "WR", "K", "TE"
         ];
@@ -156,9 +156,7 @@
         };
 
         $scope.loadRoster = function (timestamp) {
-            console.log(timestamp);
-            console.log(JSON.parse(localStorage.getItem(timestamp)));
-            //$scope.players = JSON.parse(localStorage.getItem(timestamp));
+            $scope.players = JSON.parse(localStorage.getItem(timestamp));
         };
 
         $scope.loadNewRoster = function () {
@@ -177,9 +175,9 @@
             template: "<ul class='dropdown-menu' role='menu'>" +
                             "<li><a href='javascript: void(0);' ng-click='loadNewRoster()'>NEW</a></li>" +
                             "<li class='divider'></li>" +
-                            "<li ng-repeat='item in localStorage'>" +
-                                "<a href='javascript: void(0);' ng-click='loadRoster(item.key)'>" +
-                                    new Date(item.key) +
+                            "<li ng-repeat='(key, value) in localStorage'>" +
+                                "<a href='javascript: void(0);' ng-click='loadRoster({timestamp: key})'>" +
+                                    "{{key | date: 'medium'}}" +
                                 "</a>" +
                             "</li>" +
                         "</ul>"

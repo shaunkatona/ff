@@ -11,3 +11,5 @@ Todo
 - collapse coach's tables?
 - BACK TO TOP link somewhere
 - Add paging to available table
+- delete saved rosters
+- pop >= 20 savedRosters

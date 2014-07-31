@@ -156,7 +156,9 @@
         };
 
         $scope.loadRoster = function (timestamp) {
-            $scope.players = JSON.parse(localStorage.getItem(timestamp));
+            if(typeof(Storage) !== "undefined") {
+                $scope.players = JSON.parse(localStorage.getItem(timestamp));
+            }
         };
 
         $scope.loadNewRoster = function () {
@@ -169,7 +171,8 @@
             restrict: "E",
             scope: {
                 loadRoster: "&",
-                localStorage: "="
+                localStorage: "=",
+                loadNewRoster: "&"
             },
             replace: true,
             template: "<ul class='dropdown-menu' role='menu'>" +

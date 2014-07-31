@@ -156,8 +156,9 @@
         };
 
         $scope.loadRoster = function (timestamp) {
-            console.log("wtf");
-            $scope.players = JSON.parse(localStorage.getItem(timestamp)).players;
+            console.log(timestamp);
+            console.log(JSON.parse(localStorage.getItem(timestamp)));
+            //$scope.players = JSON.parse(localStorage.getItem(timestamp));
         };
     }]);
 
@@ -165,7 +166,7 @@
         return {
             restrict: "E",
             scope: {
-                players: "="
+                loadRoster: "&"
             },
             replace: true,
             template: "<ul class='dropdown-menu' role='menu'></ul>",
@@ -176,7 +177,6 @@
                 for (var i = 0; i < localStorage.length; i++) {
                     var timestamp = Number(localStorage.key(i));
 
-                    // TODO: have loadRoster() call the controller's method above instead
                     tElem.append("<li><a href='javascript: void(0);' ng-click='loadRoster(" + timestamp + ")'>" + new Date(timestamp) + "</a>")
                 }
 
@@ -184,11 +184,6 @@
                 return function (scope, elem, attrs) {
                     scope.loadNewRoster = function () {
                         location.reload();
-                    };
-
-                    scope.loadRoster = function (timestamp) {
-                        // TODO: why does this throw an error when clicking on a saved roster???
-                        scope.players = JSON.parse(localStorage.getItem(timestamp));
                     };
                 };
             }

@@ -160,6 +160,10 @@
             console.log(JSON.parse(localStorage.getItem(timestamp)));
             //$scope.players = JSON.parse(localStorage.getItem(timestamp));
         };
+
+        $scope.loadNewRoster = function () {
+            location.reload();
+        };
     }]);
 
     app.directive("savedRosters", function () {
@@ -169,24 +173,18 @@
                 loadRoster: "&"
             },
             replace: true,
-            template: "<ul class='dropdown-menu' role='menu'></ul>",
-            compile: function (tElem, attrs) {
-                tElem.append("<li><a href='javascript: void(0);' ng-click='loadNewRoster()'>NEW</a></li>")
-                tElem.append("<li class='divider'></li>")
+            link: function (scope, elem, attrs) {
 
-                for (var i = 0; i < localStorage.length; i++) {
-                    var timestamp = Number(localStorage.key(i));
-
-                    tElem.append("<li><a href='javascript: void(0);' ng-click='loadRoster(" + timestamp + ")'>" + new Date(timestamp) + "</a>")
-                }
-
-                // TODO: remove this
-                return function (scope, elem, attrs) {
-                    scope.loadNewRoster = function () {
-                        location.reload();
-                    };
-                };
-            }
+            },
+            template: "<ul class='dropdown-menu' role='menu'>" +
+                            "<li><a href='javascript: void(0);' ng-click='loadNewRoster()'>NEW</a></li>" +
+                            "<li class='divider'></li>" +
+                            "<li ng-repeat='item in localStorage'>" +
+                                "<a href='javascript: void(0);' ng-click='loadRoster(item.key)'>" +
+                                    new Date(item.key) +
+                                "</a>" +
+                            "</li>" +
+                        "</ul>"
         };
     });
 })();

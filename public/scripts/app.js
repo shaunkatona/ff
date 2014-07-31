@@ -170,12 +170,10 @@
         return {
             restrict: "E",
             scope: {
-                loadRoster: "&"
+                loadRoster: "&",
+                localStorage: "="
             },
             replace: true,
-            link: function (scope, elem, attrs) {
-
-            },
             template: "<ul class='dropdown-menu' role='menu'>" +
                             "<li><a href='javascript: void(0);' ng-click='loadNewRoster()'>NEW</a></li>" +
                             "<li class='divider'></li>" +

@@ -13,22 +13,22 @@ th {
   background-color: #d3d3d3;
 }
 tr.K {
-  background-color: #f7f145;
+  background-color: #faf8b6;
 }
 tr.DEF {
-  background-color: #f9c866;
+  background-color: #f8da9f;
 }
 tr.QB {
-  background-color: #fc8d8d;
+  background-color: #f5c0c0;
 }
 tr.WR {
-  background-color: #9ef99d;
+  background-color: #d1fad1;
 }
 tr.RB {
-  background-color: #b0c3fc;
+  background-color: #dce3f8;
 }
 tr.TE {
-  background-color: #f99fe6;
+  background-color: #faeaf7;
 }
 .row.tables {
   padding-top: 15px;

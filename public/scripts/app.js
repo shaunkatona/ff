@@ -170,6 +170,9 @@
             replace: true,
             template: "<ul class='dropdown-menu' role='menu'></ul>",
             compile: function (tElem, attrs) {
+                tElem.append("<li><a href='javascript: void(0);' ng-click='loadNewRoster()'>NEW</a></li>")
+                tElem.append("<li class='divider'></li>")
+
                 for (var i = 0; i < localStorage.length; i++) {
                     var timestamp = Number(localStorage.key(i));
 
@@ -179,6 +182,10 @@
 
                 // TODO: remove this
                 return function (scope, elem, attrs) {
+                    scope.loadNewRoster = function () {
+                        location.reload();
+                    };
+
                     scope.loadRoster = function (timestamp) {
                         // TODO: why does this throw an error when clicking on a saved roster???
                         scope.players = JSON.parse(localStorage.getItem(timestamp));

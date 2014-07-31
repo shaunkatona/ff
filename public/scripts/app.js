@@ -5,6 +5,7 @@
     var app = angular.module('ffApp', []);
 
     app.controller('PlayerController', ['$scope', '$http', function ($scope, $http) {
+        $scope.savedRosters = [];
         $scope.search = {
             displayName: "",
             position: ""
@@ -46,24 +47,32 @@
         $scope.addPlayer = function (player) {
             $scope.players.available.splice($scope.players.available.indexOf(player), 1);
             $scope.players.mine.push(player);
+
+            $scope.saveRoster();
         };
 
         // take the player out of the available queue and add them to another coach's team (not mine)
         $scope.addPlayerToTheirs = function (player, coach) {
             $scope.players.available.splice($scope.players.available.indexOf(player), 1);
             $scope.players.theirs[coach].push(player);
+
+            $scope.saveRoster();
         };
 
         // take the player out of our queue and add them to the available queue
         $scope.releasePlayer = function (player) {
             $scope.players.mine.splice($scope.players.mine.indexOf(player), 1);
             $scope.players.available.push(player);
+
+            $scope.saveRoster();
         };
 
         // take the player out of their queue and add them to the available queue
         $scope.releasePlayerFromTheirs = function (player, coach) {
             $scope.players.theirs[coach].splice($scope.players.theirs[coach].indexOf(player), 1);
             $scope.players.available.push(player);
+
+            $scope.saveRoster();
         };
 
         // to color code the rows by position
@@ -139,5 +148,43 @@
 
             return (sum / numPlayersInThatPosition).toFixed(2);
         };
+
+        $scope.saveRoster = function () {
+            if(typeof(Storage) !== "undefined") {
+                localStorage.setItem(new Date().getTime(), JSON.stringify($scope.players));
+            }
+        };
+
+        $scope.loadRoster = function (timestamp) {
+            console.log("wtf");
+            $scope.players = JSON.parse(localStorage.getItem(timestamp)).players;
+        };
     }]);
+
+    app.directive("savedRosters", function () {
+        return {
+            restrict: "E",
+            scope: {
+                players: "="
+            },
+            replace: true,
+            template: "<ul class='dropdown-menu' role='menu'></ul>",
+            compile: function (tElem, attrs) {
+                for (var i = 0; i < localStorage.length; i++) {
+                    var timestamp = Number(localStorage.key(i));
+
+                    // TODO: have loadRoster() call the controller's method above instead
+                    tElem.append("<li><a href='javascript: void(0);' ng-click='loadRoster(" + timestamp + ")'>" + new Date(timestamp) + "</a>")
+                }
+
+                // TODO: remove this
+                return function (scope, elem, attrs) {
+                    scope.loadRoster = function (timestamp) {
+                        // TODO: why does this throw an error when clicking on a saved roster???
+                        scope.players = JSON.parse(localStorage.getItem(timestamp));
+                    };
+                };
+            }
+        };
+    });
 })();

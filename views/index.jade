@@ -3,17 +3,33 @@
 
 extend layout
 block content
+    .navbar.navbar-default.navbar-fixed-top(role="navigation")
+        .container
+            .navbar-header
+                button.navbar-toggle(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.dropdown
+                        a.dropdown-toggle(href="#", data-toggle="dropdown")
+                            | Load Roster
+                            span.caret
+                        saved-rosters(load-roster)
     div.container(ng-controller="PlayerController as PlayerCtrl")
         .row
             form
-                .col-md-12.text-center.form-group
+                .col-md-6.text-center.form-group
                     input(id="searchBox", name="searchBox", placeholder="Filter Names", type="text", ng-model="search.displayName")
+                .col-md-6
         .row
             .col-md-6.text-center
                 button.btn.btn-default(type="button", ng-click="search.position=''") ALL
                 button.btn.btn-default(type="button", ng-click="search.position=position", ng-repeat="position in positions") {{position}}
             .col-md-6
-        .row
+        .row.tables
             .col-md-6
                 table.table.table-bordered.table-hover
                     thead
